@@ -1,5 +1,6 @@
 // src/components/Mascot/Mascot.tsx
 import type { MascotAnimation } from '../../types';
+import { BASE_PATH } from '../../config';
 
 interface MascotProps {
   skinId: string;
@@ -7,7 +8,7 @@ interface MascotProps {
 }
 
 export function Mascot({ skinId, animation = 'idle' }: MascotProps) {
-  const skinImage = skinId.replace('skin_', '/bexo-pet/assets/skins/') + '.svg';
+  const skinImage = skinId.replace('skin_', `${BASE_PATH}assets/skins/`) + '.svg';
 
   return (
     <div className="relative w-64 h-64 mx-auto">
@@ -21,7 +22,7 @@ export function Mascot({ skinId, animation = 'idle' }: MascotProps) {
         }`}
         style={{ imageRendering: 'pixelated' }}
         onError={(e) => {
-          (e.target as HTMLImageElement).src = '/bexo-pet/assets/skins/default.svg';
+          (e.target as HTMLImageElement).src = `${BASE_PATH}assets/skins/default.svg`;
         }}
       />
     </div>

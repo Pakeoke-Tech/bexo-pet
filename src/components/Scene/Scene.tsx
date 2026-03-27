@@ -1,4 +1,5 @@
 // src/components/Scene/Scene.tsx
+import { BASE_PATH } from '../../config';
 
 interface SceneProps {
   sceneId: string;
@@ -7,7 +8,7 @@ interface SceneProps {
 }
 
 export function Scene({ sceneId, decorations, children }: SceneProps) {
-  const sceneImage = sceneId.replace('scene_', '/bexo-pet/assets/scenes/') + '.svg';
+  const sceneImage = sceneId.replace('scene_', `${BASE_PATH}assets/scenes/`) + '.svg';
 
   return (
     <div className="relative w-full h-96 bg-gray-800 rounded-lg overflow-hidden shadow-2xl">
@@ -18,13 +19,13 @@ export function Scene({ sceneId, decorations, children }: SceneProps) {
         className="absolute inset-0 w-full h-full object-cover"
         style={{ imageRendering: 'pixelated' }}
         onError={(e) => {
-          (e.target as HTMLImageElement).src = '/bexo-pet/assets/scenes/default.svg';
+          (e.target as HTMLImageElement).src = `${BASE_PATH}assets/scenes/default.svg`;
         }}
       />
 
       {/* Decorations Layer */}
       {decorations.map((decorId, index) => {
-        const decorImage = decorId.replace('decor_', '/bexo-pet/assets/decor/') + '.svg';
+        const decorImage = decorId.replace('decor_', `${BASE_PATH}assets/decor/`) + '.svg';
         return (
           <img
             key={decorId}

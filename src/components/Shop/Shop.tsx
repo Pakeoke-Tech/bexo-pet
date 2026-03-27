@@ -1,5 +1,6 @@
 // src/components/Shop/Shop.tsx
 import { useState } from 'react';
+import { BASE_PATH } from '../../config';
 import { useShopStore } from '../../stores/shopStore';
 import { useInventory } from '../../hooks/useInventory';
 import { useGameStore } from '../../stores/gameStore';
@@ -114,7 +115,7 @@ export function Shop() {
                 className="w-full h-32 object-cover rounded mb-2"
                 style={{ imageRendering: 'pixelated' }}
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = '/bexo-pet/assets/placeholder.svg';
+                  (e.target as HTMLImageElement).src = `${BASE_PATH}assets/placeholder.svg`;
                 }}
               />
               <h3 className="font-bold">{item.name}</h3>
