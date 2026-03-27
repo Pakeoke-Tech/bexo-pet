@@ -7,6 +7,7 @@ Mascota virtual gamificada para Bexo Wallet con integración de XO Connect.
 - ✅ Mascota pixel art personalizable con skins
 - ✅ Escenarios modulares y decoraciones
 - ✅ Doble sistema de puntos (Balance × 5 e Intereses de Staking)
+- ✅ **Display del balance real de la wallet (ETH/MATIC/BNB)**
 - ✅ Integración real con XO Connect SDK
 - ✅ 100% frontend, sin backend
 - ✅ Compatible con Ethereum, Polygon y BSC
@@ -72,9 +73,9 @@ El deploy es automático al hacer push a `main` vía GitHub Actions.
 Este proyecto utiliza XO Connect SDK para la integración con Bexo Wallet:
 
 - `eth_requestAccounts` - Conexión de wallet
-- `eth_getBalance` - Obtener balance
+- `eth_getBalance` - Obtener balance real en Wei
 - `eth_chainId` - Obtener red actual
-- Eventos EIP-1193: `accountsChanged`, `chainChanged`
+- Eventos EIP-1193: `accountsChanged`, `chainChanged`, `disconnect`
 
 Documentación: [https://xo-connect.xolabs.io/](https://xo-connect.xolabs.io/)
 
