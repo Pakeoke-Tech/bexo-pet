@@ -31,6 +31,10 @@ export function Shop() {
 
     const success = await purchaseItem(itemId, activeTab);
     if (success) {
+      // Auto-equip after purchase (solo para skins y scenes)
+      if (itemId.startsWith('skin_') || itemId.startsWith('scene_')) {
+        equipItem(itemId);
+      }
       alert(`Successfully purchased ${itemId}!`);
     } else {
       alert('Purchase failed - check if you have enough points or already own this item');
@@ -96,13 +100,18 @@ export function Shop() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredItems.map(item => {
           const isOwned = ownedItems.includes(item.id);
+          const isEquipped =
+            (item.category === 'skin' && item.id === useGameStore.getState().equippedSkin) ||
+            (item.category === 'scene' && item.id === useGameStore.getState().equippedScene);
           const canAfford = currentPoints >= item.price;
 
           return (
             <div
               key={item.id}
               className={`p-4 rounded-lg border-2 transition-all ${
-                isOwned
+                isEquipped
+                  ? 'border-yellow-500 bg-yellow-500/10'
+                  : isOwned
                   ? 'border-green-500 bg-green-500/10'
                   : canAfford
                   ? 'border-gray-600 bg-gray-700 hover:border-gray-500'
@@ -112,10 +121,10 @@ export function Shop() {
               <img
                 src={item.image}
                 alt={item.name}
-                className="w-full h-32 object-cover rounded mb-2"
+                className="w-full h-32 object-contain rounded mb-2 bg-gray-900/50 p-2"
                 style={{ imageRendering: 'pixelated' }}
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = `${BASE_PATH}assets/placeholder.svg`;
+                  (e.target as HTMLImageElement).src = `${BASE_PATH}assets/placeholder.png`;
                 }}
               />
               <h3 className="font-bold">{item.name}</h3>
@@ -124,7 +133,14 @@ export function Shop() {
                 Tier {item.tier} - {item.price.toLocaleString()} pts
               </p>
 
-              {isOwned ? (
+              {isEquipped ? (
+                <button
+                  disabled
+                  className="w-full mt-2 px-4 py-2 bg-yellow-500 text-black font-bold rounded cursor-default"
+                >
+                  Equipped
+                </button>
+              ) : isOwned ? (
                 <button
                   onClick={() => handleEquip(item.id)}
                   className="w-full mt-2 px-4 py-2 bg-green-500 hover:bg-green-600 rounded transition-colors"

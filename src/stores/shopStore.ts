@@ -3,7 +3,7 @@ import { create } from 'zustand';
 import { BASE_PATH } from '../config';
 import type { ShopItem, ItemTier } from '../types';
 
-// Pricing configuration
+// Pricing configuration (rangos por tier)
 export const ITEM_TIERS: Record<ItemTier, { name: string; price: number }> = {
   1: { name: 'Básico', price: 100 },
   2: { name: 'Común', price: 2000 },
@@ -22,7 +22,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Primer personaje de la colección',
     tier: 1,
     currency: 'rare',
-    price: ITEM_TIERS[1].price,
+    price: 100,
     image: `${BASE_PATH}assets/skins/fpk1.png`,
     category: 'skin'
   },
@@ -32,7 +32,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Segundo personaje inicial',
     tier: 1,
     currency: 'rare',
-    price: ITEM_TIERS[1].price,
+    price: 150,
     image: `${BASE_PATH}assets/skins/fpk2.png`,
     category: 'skin'
   },
@@ -42,7 +42,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Personaje de nivel común',
     tier: 2,
     currency: 'rare',
-    price: ITEM_TIERS[2].price,
+    price: 2000,
     image: `${BASE_PATH}assets/skins/fpk3.png`,
     category: 'skin'
   },
@@ -52,7 +52,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Otro personaje común',
     tier: 2,
     currency: 'rare',
-    price: ITEM_TIERS[2].price,
+    price: 2500,
     image: `${BASE_PATH}assets/skins/fpk4.png`,
     category: 'skin'
   },
@@ -62,7 +62,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Personaje de colección rara',
     tier: 3,
     currency: 'rare',
-    price: ITEM_TIERS[3].price,
+    price: 5000,
     image: `${BASE_PATH}assets/skins/fpk5.png`,
     category: 'skin'
   },
@@ -72,7 +72,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Personaje raro especial',
     tier: 3,
     currency: 'rare',
-    price: ITEM_TIERS[3].price,
+    price: 6000,
     image: `${BASE_PATH}assets/skins/fpk6.png`,
     category: 'skin'
   },
@@ -82,7 +82,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Personaje de nivel épico',
     tier: 4,
     currency: 'rare',
-    price: ITEM_TIERS[4].price,
+    price: 20000,
     image: `${BASE_PATH}assets/skins/fpk7.png`,
     category: 'skin'
   },
@@ -92,7 +92,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Personaje épico legendario',
     tier: 4,
     currency: 'rare',
-    price: ITEM_TIERS[4].price,
+    price: 25000,
     image: `${BASE_PATH}assets/skins/fpk8.png`,
     category: 'skin'
   },
@@ -102,7 +102,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Personaje legendario único',
     tier: 5,
     currency: 'rare',
-    price: ITEM_TIERS[5].price,
+    price: 100000,
     image: `${BASE_PATH}assets/skins/fpk9.png`,
     category: 'skin'
   },
@@ -112,7 +112,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'El personaje más exclusivo',
     tier: 6,
     currency: 'rare',
-    price: ITEM_TIERS[6].price,
+    price: 500000,
     image: `${BASE_PATH}assets/skins/fpk10.png`,
     category: 'skin'
   },
@@ -124,7 +124,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Habitación simple y acogedora',
     tier: 1,
     currency: 'balance',
-    price: ITEM_TIERS[1].price,
+    price: 100,
     image: `${BASE_PATH}assets/scenes/frame0000.png`,
     category: 'scene'
   },
@@ -134,7 +134,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Otro cuarto simple',
     tier: 1,
     currency: 'balance',
-    price: ITEM_TIERS[1].price,
+    price: 150,
     image: `${BASE_PATH}assets/scenes/frame0001.png`,
     category: 'scene'
   },
@@ -144,7 +144,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Espacio común amplio',
     tier: 2,
     currency: 'balance',
-    price: ITEM_TIERS[2].price,
+    price: 2000,
     image: `${BASE_PATH}assets/scenes/frame0002.png`,
     category: 'scene'
   },
@@ -154,7 +154,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Otro espacio común',
     tier: 2,
     currency: 'balance',
-    price: ITEM_TIERS[2].price,
+    price: 2500,
     image: `${BASE_PATH}assets/scenes/frame0004.png`,
     category: 'scene'
   },
@@ -164,7 +164,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Escenario de colección rara',
     tier: 3,
     currency: 'balance',
-    price: ITEM_TIERS[3].price,
+    price: 5000,
     image: `${BASE_PATH}assets/scenes/frame1.png`,
     category: 'scene'
   },
@@ -174,7 +174,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Escenario épico impresionante',
     tier: 4,
     currency: 'balance',
-    price: ITEM_TIERS[4].price,
+    price: 20000,
     image: `${BASE_PATH}assets/scenes/frame2.png`,
     category: 'scene'
   },
@@ -184,7 +184,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'El escenario más épico',
     tier: 4,
     currency: 'balance',
-    price: ITEM_TIERS[4].price,
+    price: 28000,
     image: `${BASE_PATH}assets/scenes/frame3.png`,
     category: 'scene'
   },
@@ -196,7 +196,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Caja básica de almacenaje',
     tier: 1,
     currency: 'balance',
-    price: ITEM_TIERS[1].price,
+    price: 100,
     image: `${BASE_PATH}assets/decor/Crate1.png`,
     category: 'decoration'
   },
@@ -206,7 +206,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Jarrón simple decorativo',
     tier: 1,
     currency: 'balance',
-    price: ITEM_TIERS[1].price,
+    price: 120,
     image: `${BASE_PATH}assets/decor/Vase1.png`,
     category: 'decoration'
   },
@@ -216,7 +216,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Otro jarrón simple',
     tier: 1,
     currency: 'balance',
-    price: ITEM_TIERS[1].price,
+    price: 130,
     image: `${BASE_PATH}assets/decor/Vase2.png`,
     category: 'decoration'
   },
@@ -226,7 +226,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Caja de nivel común',
     tier: 2,
     currency: 'balance',
-    price: ITEM_TIERS[2].price,
+    price: 2000,
     image: `${BASE_PATH}assets/decor/Crate2.png`,
     category: 'decoration'
   },
@@ -236,7 +236,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Caja común reforzada',
     tier: 2,
     currency: 'balance',
-    price: ITEM_TIERS[2].price,
+    price: 2200,
     image: `${BASE_PATH}assets/decor/Crate3.png`,
     category: 'decoration'
   },
@@ -246,7 +246,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Jarrón de mejor calidad',
     tier: 2,
     currency: 'balance',
-    price: ITEM_TIERS[2].price,
+    price: 2500,
     image: `${BASE_PATH}assets/decor/Vase3.png`,
     category: 'decoration'
   },
@@ -256,7 +256,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Jarrón común decorativo',
     tier: 2,
     currency: 'balance',
-    price: ITEM_TIERS[2].price,
+    price: 2800,
     image: `${BASE_PATH}assets/decor/Vase4.png`,
     category: 'decoration'
   },
@@ -266,7 +266,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'Jarrón de colección rara',
     tier: 3,
     currency: 'balance',
-    price: ITEM_TIERS[3].price,
+    price: 5000,
     image: `${BASE_PATH}assets/decor/Vase5.png`,
     category: 'decoration'
   },
@@ -276,7 +276,7 @@ const SHOP_ITEMS: Record<string, ShopItem> = {
     description: 'El jarrón más épico',
     tier: 4,
     currency: 'balance',
-    price: ITEM_TIERS[4].price,
+    price: 20000,
     image: `${BASE_PATH}assets/decor/Vase6.png`,
     category: 'decoration'
   }

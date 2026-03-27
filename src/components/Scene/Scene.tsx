@@ -19,7 +19,7 @@ export function Scene({ sceneId, decorations, children }: SceneProps) {
         className="absolute inset-0 w-full h-full object-cover"
         style={{ imageRendering: 'pixelated', zIndex: 0 }}
         onError={(e) => {
-          (e.target as HTMLImageElement).src = `${BASE_PATH}assets/scenes/default.svg`;
+          (e.target as HTMLImageElement).src = `${BASE_PATH}assets/scenes/default.png`;
         }}
       />
 
@@ -28,7 +28,7 @@ export function Scene({ sceneId, decorations, children }: SceneProps) {
         const decorImage = decorId.replace('decor_', `${BASE_PATH}assets/decor/`) + '.png';
         // Distribuir decoraciones: mitad a la izquierda, mitad a la derecha
         const isLeftSide = index % 2 === 0;
-        const position = isLeftSide ? 5 : 75; // 5% desde izq, 75% desde der
+        const position = isLeftSide ? 5 : 70; // 5% desde izq, 70% desde der
         const offset = (Math.floor(index / 2) * 12); // 12% de separación vertical
 
         return (
@@ -36,7 +36,7 @@ export function Scene({ sceneId, decorations, children }: SceneProps) {
             key={decorId}
             src={decorImage}
             alt={decorId}
-            className="absolute w-20 h-20 object-contain drop-shadow-lg"
+            className="absolute w-24 h-24 object-contain drop-shadow-2xl"
             style={{
               left: `${position}%`,
               bottom: `${15 + offset}%`,
@@ -52,7 +52,7 @@ export function Scene({ sceneId, decorations, children }: SceneProps) {
 
       {/* Capa 3: Personaje (centro-abajo) - z-index 20 */}
       <div className="absolute inset-0 flex items-end justify-center pb-8" style={{ zIndex: 20 }}>
-        <div className="relative">
+        <div className="relative drop-shadow-2xl">
           {children}
         </div>
       </div>
@@ -61,7 +61,7 @@ export function Scene({ sceneId, decorations, children }: SceneProps) {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 20%)',
+          background: 'linear-gradient(to top, rgba(0,0,0,0.2) 0%, transparent 20%)',
           zIndex: 5
         }}
       />
