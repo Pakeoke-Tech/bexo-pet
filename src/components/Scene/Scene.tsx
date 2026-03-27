@@ -1,5 +1,4 @@
-// src/components/Scene/Scene.tsx'
-import type { MascotAnimation } from '../../types';
+// src/components/Scene/Scene.tsx
 
 interface SceneProps {
   sceneId: string;

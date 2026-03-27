@@ -13,8 +13,7 @@ export const ITEM_TIERS: Record<ItemTier, { name: string; price: number }> = {
 };
 
 // Shop items catalog
-export const SHOP_ITEMS: Record<string, ShopItem> = {
-  // SKINS (Rare Points)
+const SHOP_ITEMS: Record<string, ShopItem> = {
   'skin_basic_dog': {
     id: 'skin_basic_dog',
     name: 'Perrito Clásico',
@@ -45,8 +44,6 @@ export const SHOP_ITEMS: Record<string, ShopItem> = {
     image: '/assets/skins/dragon.png',
     category: 'skin'
   },
-
-  // SCENES (Balance Points)
   'scene_basic_room': {
     id: 'scene_basic_room',
     name: 'Habitación Básica',
@@ -67,8 +64,6 @@ export const SHOP_ITEMS: Record<string, ShopItem> = {
     image: '/assets/scenes/city_cyber.png',
     category: 'scene'
   },
-
-  // DECORATIONS (Balance Points)
   'decor_basic_lamp': {
     id: 'decor_basic_lamp',
     name: 'Lámpara Básica',
@@ -109,22 +104,22 @@ interface ShopStore {
   getItemsByCurrency: (currency: 'balance' | 'rare') => ShopItem[];
 }
 
-export const useShopStore = create<ShopStore>((set, get) => ({
+export const useShopStore = create<ShopStore>(() => ({
   items: SHOP_ITEMS,
 
-  getItem: (itemId: string) => {
-    return get().items[itemId];
+  getItem: (itemId) => {
+    return SHOP_ITEMS[itemId];
   },
 
-  getItemsByTier: (tier: ItemTier) => {
-    return Object.values(get().items).filter(item => item.tier === tier);
+  getItemsByTier: (tier) => {
+    return Object.values(SHOP_ITEMS).filter(item => item.tier === tier);
   },
 
   getItemsByCategory: (category) => {
-    return Object.values(get().items).filter(item => item.category === category);
+    return Object.values(SHOP_ITEMS).filter(item => item.category === category);
   },
 
   getItemsByCurrency: (currency) => {
-    return Object.values(get().items).filter(item => item.currency === currency);
+    return Object.values(SHOP_ITEMS).filter(item => item.currency === currency);
   }
 }));
