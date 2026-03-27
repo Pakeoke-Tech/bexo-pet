@@ -135,14 +135,6 @@ export const useGameStore = create<GameStore>((set, get) => ({
     // Add to inventory
     await addItemToInventory(address, itemId);
 
-    // Update local inventory state
-    const category = item.category + 's' as 'skins' | 'scenes' | 'decorations';
-    set({
-      inventory: {
-        ...get().inventory,
-        [category]: [...get().inventory[category], itemId]
-      }
-    });
 
     return true;
   }

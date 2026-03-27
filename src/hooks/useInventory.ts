@@ -10,23 +10,25 @@ export function useInventory() {
   const setInventory = useGameStore(state => state.setInventory);
   const purchaseItemStore = useGameStore(state => state.purchaseItem);
 
-  // Load inventory from IndexedDB when address changes or after purchase
-  const reloadInventory = useCallback(async () => {
+  // Load inventory from IndexedDB when address changes
+  useEffect(() => {
     if (!address) return;
 
-    const items = await getInventory(address);
-    const skins = items.filter(id => id.startsWith('skin_'));
-    const scenes = items.filter(id => id.startsWith('scene_'));
-    const decorations = items.filter(id => id.startsWith('decor_'));
+    const loadInventory = async () => {
+      const items = await getInventory(address);
+      const skins = items.filter(id => id.startsWith('skin_'));
+      const scenes = items.filter(id => id.startsWith('scene_'));
+      const decorations = items.filter(id => id.startsWith('decor_'));
 
-    setInventory({ skins, scenes, decorations });
+      console.log('Loading inventory from IndexedDB:', { skins, scenes, decorations });
+      setInventory({ skins, scenes, decorations });
+    };
+
+    loadInventory();
   }, [address, setInventory]);
 
-  useEffect(() => {
-    reloadInventory();
-  }, [address, reloadInventory]);
-
   const equipItem = useCallback((itemId: string) => {
+    console.log('Equipping item:', itemId);
     if (itemId.startsWith('skin_')) {
       useGameStore.getState().equipSkin(itemId);
     } else if (itemId.startsWith('scene_')) {
@@ -41,17 +43,28 @@ export function useInventory() {
   }, []);
 
   const purchaseItem = useCallback(async (itemId: string, currency: Currency) => {
-    if (!address) return false;
+    if (!address) {
+      console.error('No address connected');
+      return false;
+    }
 
+    console.log('Purchasing item:', itemId, 'with currency:', currency);
     const success = await purchaseItemStore(itemId, currency, address);
+    console.log('Purchase success:', success);
 
-    // Recargar inventario después de comprar
     if (success) {
-      await reloadInventory();
+      // Recargar inventario desde IndexedDB para sincronizar
+      const items = await getInventory(address);
+      const skins = items.filter(id => id.startsWith('skin_'));
+      const scenes = items.filter(id => id.startsWith('scene_'));
+      const decorations = items.filter(id => id.startsWith('decor_'));
+
+      console.log('Reloaded inventory after purchase:', { skins, scenes, decorations });
+      setInventory({ skins, scenes, decorations });
     }
 
     return success;
-  }, [address, purchaseItemStore, reloadInventory]);
+  }, [address, purchaseItemStore, setInventory]);
 
   return {
     ownedSkins: inventory.skins,
@@ -62,7 +75,6 @@ export function useInventory() {
     equippedDecorations: useGameStore(state => state.equippedDecorations),
     purchaseItem,
     equipItem,
-    unequipDecoration,
-    reloadInventory
+    unequipDecoration
   };
 }
