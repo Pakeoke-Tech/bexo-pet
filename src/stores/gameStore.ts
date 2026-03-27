@@ -11,6 +11,7 @@ interface GameStore {
   isConnected: boolean;
   address: string | null;
   chainId: string | null;
+  walletBalance: string; // Balance real en Wei
 
   // Points
   balancePoints: number;
@@ -30,6 +31,7 @@ interface GameStore {
 
   // Actions
   setWallet: (address: string, chainId: string) => void;
+  setWalletBalance: (balance: string) => void;
   disconnectWallet: () => void;
   updatePoints: (balance: number, rare: number) => void;
   setInventory: (inventory: { skins: string[]; scenes: string[]; decorations: string[] }) => void;
@@ -45,6 +47,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   isConnected: false,
   address: null,
   chainId: null,
+  walletBalance: '0',
   balancePoints: 0,
   rarePoints: 0,
   equippedSkin: 'skin_basic_dog',
@@ -61,11 +64,16 @@ export const useGameStore = create<GameStore>((set, get) => ({
     set({ isConnected: true, address, chainId });
   },
 
+  setWalletBalance: (balance: string) => {
+    set({ walletBalance: balance });
+  },
+
   disconnectWallet: () => {
     set({
       isConnected: false,
       address: null,
       chainId: null,
+      walletBalance: '0',
       balancePoints: 0,
       rarePoints: 0,
       equippedSkin: 'skin_basic_dog',

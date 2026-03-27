@@ -5,7 +5,7 @@ import { getXOConnectProvider, initializeXOConnect } from '../lib/xo-connect';
 
 export function useXOConnect() {
   const [error, setError] = useState<Error | null>(null);
-  const { setWallet, disconnectWallet } = useGameStore();
+  const { setWallet, setWalletBalance, disconnectWallet } = useGameStore();
 
   const connect = useCallback(async () => {
     try {
@@ -30,6 +30,14 @@ export function useXOConnect() {
 
       setWallet(accounts[0], chainId);
 
+      // Get balance using eth_getBalance
+      const balance = await provider.request({
+        method: 'eth_getBalance',
+        params: [accounts[0], 'latest']
+      });
+
+      setWalletBalance(balance);
+
     } catch (err: any) {
       console.error('Error connecting wallet:', err);
 
@@ -42,7 +50,7 @@ export function useXOConnect() {
         setError(err);
       }
     }
-  }, [setWallet]);
+  }, [setWallet, setWalletBalance]);
 
   const disconnect = useCallback(() => {
     disconnectWallet();
@@ -60,13 +68,24 @@ export function useXOConnect() {
       return;
     }
 
-    const handleAccountsChanged = (accounts: string[]) => {
+    const handleAccountsChanged = async (accounts: string[]) => {
       if (accounts.length === 0) {
         // User disconnected wallet
         disconnect();
       } else if (accounts[0] !== useGameStore.getState().address) {
         // User switched accounts
         setWallet(accounts[0], useGameStore.getState().chainId!);
+
+        // Get new balance for switched account
+        try {
+          const balance = await provider.request({
+            method: 'eth_getBalance',
+            params: [accounts[0], 'latest']
+          });
+          setWalletBalance(balance);
+        } catch (error) {
+          console.error('Error getting balance for switched account:', error);
+        }
       }
     };
 
@@ -91,12 +110,13 @@ export function useXOConnect() {
       provider.removeListener?.('chainChanged', handleChainChanged);
       provider.removeListener?.('disconnect', handleDisconnect);
     };
-  }, [setWallet, disconnect]);
+  }, [setWallet, setWalletBalance, disconnect]);
 
   return {
     isConnected: useGameStore(state => state.isConnected),
     address: useGameStore(state => state.address),
     chainId: useGameStore(state => state.chainId),
+    walletBalance: useGameStore(state => state.walletBalance),
     connect,
     disconnect,
     error
