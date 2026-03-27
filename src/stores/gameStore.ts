@@ -50,8 +50,8 @@ export const useGameStore = create<GameStore>((set, get) => ({
   walletBalance: '0',
   balancePoints: 0,
   rarePoints: 0,
-  equippedSkin: 'skin_basic_dog',
-  equippedScene: 'scene_basic_room',
+  equippedSkin: 'skin_fpk1',
+  equippedScene: 'scene_frame0000',
   equippedDecorations: [],
   inventory: {
     skins: [],
@@ -76,8 +76,8 @@ export const useGameStore = create<GameStore>((set, get) => ({
       walletBalance: '0',
       balancePoints: 0,
       rarePoints: 0,
-      equippedSkin: 'skin_basic_dog',
-      equippedScene: 'scene_basic_room',
+      equippedSkin: 'skin_fpk1',
+      equippedScene: 'scene_frame0000',
       equippedDecorations: []
     });
   },

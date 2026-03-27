@@ -15,84 +15,269 @@ export const ITEM_TIERS: Record<ItemTier, { name: string; price: number }> = {
 
 // Shop items catalog
 const SHOP_ITEMS: Record<string, ShopItem> = {
-  'skin_basic_dog': {
-    id: 'skin_basic_dog',
-    name: 'Perrito Clásico',
-    description: 'Tu compañero fiel pixelado',
+  // =================== SKINS (Rare Points) ===================
+  'skin_fpk1': {
+    id: 'skin_fpk1',
+    name: 'Personaje Básico 1',
+    description: 'Primer personaje de la colección',
     tier: 1,
     currency: 'rare',
     price: ITEM_TIERS[1].price,
-    image: `${BASE_PATH}assets/skins/dog_basic.svg`,
+    image: `${BASE_PATH}assets/skins/fpk1.png`,
     category: 'skin'
   },
-  'skin_cyber_cat': {
-    id: 'skin_cyber_cat',
-    name: 'Gato Cyberpunk',
-    description: 'Felino del futuro con implantes',
+  'skin_fpk2': {
+    id: 'skin_fpk2',
+    name: 'Personaje Básico 2',
+    description: 'Segundo personaje inicial',
+    tier: 1,
+    currency: 'rare',
+    price: ITEM_TIERS[1].price,
+    image: `${BASE_PATH}assets/skins/fpk2.png`,
+    category: 'skin'
+  },
+  'skin_fpk3': {
+    id: 'skin_fpk3',
+    name: 'Personaje Común 1',
+    description: 'Personaje de nivel común',
+    tier: 2,
+    currency: 'rare',
+    price: ITEM_TIERS[2].price,
+    image: `${BASE_PATH}assets/skins/fpk3.png`,
+    category: 'skin'
+  },
+  'skin_fpk4': {
+    id: 'skin_fpk4',
+    name: 'Personaje Común 2',
+    description: 'Otro personaje común',
+    tier: 2,
+    currency: 'rare',
+    price: ITEM_TIERS[2].price,
+    image: `${BASE_PATH}assets/skins/fpk4.png`,
+    category: 'skin'
+  },
+  'skin_fpk5': {
+    id: 'skin_fpk5',
+    name: 'Personaje Raro 1',
+    description: 'Personaje de colección rara',
     tier: 3,
     currency: 'rare',
     price: ITEM_TIERS[3].price,
-    image: `${BASE_PATH}assets/skins/cat_cyber.svg`,
+    image: `${BASE_PATH}assets/skins/fpk5.png`,
     category: 'skin'
   },
-  'skin_dragon_mythic': {
-    id: 'skin_dragon_mythic',
-    name: 'Dragón Mítico',
-    description: 'Criatura legendaria de pixels dorados',
+  'skin_fpk6': {
+    id: 'skin_fpk6',
+    name: 'Personaje Raro 2',
+    description: 'Personaje raro especial',
+    tier: 3,
+    currency: 'rare',
+    price: ITEM_TIERS[3].price,
+    image: `${BASE_PATH}assets/skins/fpk6.png`,
+    category: 'skin'
+  },
+  'skin_fpk7': {
+    id: 'skin_fpk7',
+    name: 'Personaje Épico 1',
+    description: 'Personaje de nivel épico',
+    tier: 4,
+    currency: 'rare',
+    price: ITEM_TIERS[4].price,
+    image: `${BASE_PATH}assets/skins/fpk7.png`,
+    category: 'skin'
+  },
+  'skin_fpk8': {
+    id: 'skin_fpk8',
+    name: 'Personaje Épico 2',
+    description: 'Personaje épico legendario',
+    tier: 4,
+    currency: 'rare',
+    price: ITEM_TIERS[4].price,
+    image: `${BASE_PATH}assets/skins/fpk8.png`,
+    category: 'skin'
+  },
+  'skin_fpk9': {
+    id: 'skin_fpk9',
+    name: 'Personaje Legendario',
+    description: 'Personaje legendario único',
+    tier: 5,
+    currency: 'rare',
+    price: ITEM_TIERS[5].price,
+    image: `${BASE_PATH}assets/skins/fpk9.png`,
+    category: 'skin'
+  },
+  'skin_fpk10': {
+    id: 'skin_fpk10',
+    name: 'Personaje Exclusivo',
+    description: 'El personaje más exclusivo',
     tier: 6,
     currency: 'rare',
     price: ITEM_TIERS[6].price,
-    image: `${BASE_PATH}assets/skins/dragon.svg`,
+    image: `${BASE_PATH}assets/skins/fpk10.png`,
     category: 'skin'
   },
-  'scene_basic_room': {
-    id: 'scene_basic_room',
-    name: 'Habitación Básica',
-    description: 'Un cuarto simple y acogedor',
+
+  // =================== SCENES (Balance Points) ===================
+  'scene_frame0000': {
+    id: 'scene_frame0000',
+    name: 'Escenario Básico 1',
+    description: 'Habitación simple y acogedora',
     tier: 1,
     currency: 'balance',
     price: ITEM_TIERS[1].price,
-    image: `${BASE_PATH}assets/scenes/room_basic.svg`,
+    image: `${BASE_PATH}assets/scenes/frame0000.png`,
     category: 'scene'
   },
-  'scene_cyber_city': {
-    id: 'scene_cyber_city',
-    name: 'Ciudad Cyberpunk',
-    description: 'Skyline neón del año 2077',
-    tier: 4,
-    currency: 'balance',
-    price: ITEM_TIERS[4].price,
-    image: `${BASE_PATH}assets/scenes/city_cyber.svg`,
-    category: 'scene'
-  },
-  'decor_basic_lamp': {
-    id: 'decor_basic_lamp',
-    name: 'Lámpara Básica',
-    description: 'Iluminación simple',
+  'scene_frame0001': {
+    id: 'scene_frame0001',
+    name: 'Escenario Básico 2',
+    description: 'Otro cuarto simple',
     tier: 1,
     currency: 'balance',
     price: ITEM_TIERS[1].price,
-    image: `${BASE_PATH}assets/decor/lamp_basic.svg`,
-    category: 'decoration'
+    image: `${BASE_PATH}assets/scenes/frame0001.png`,
+    category: 'scene'
   },
-  'decor_comfy_sofa': {
-    id: 'decor_comfy_sofa',
-    name: 'Sofá Confort',
-    description: 'Asiento acogedor para tu mascota',
+  'scene_frame0002': {
+    id: 'scene_frame0002',
+    name: 'Escenario Común 1',
+    description: 'Espacio común amplio',
     tier: 2,
     currency: 'balance',
     price: ITEM_TIERS[2].price,
-    image: `${BASE_PATH}assets/decor/sofa_comfy.svg`,
-    category: 'decoration'
+    image: `${BASE_PATH}assets/scenes/frame0002.png`,
+    category: 'scene'
   },
-  'decor_disco_ball': {
-    id: 'decor_disco_ball',
-    name: 'Discothèque Ball',
-    description: 'Luces de discoteca para fiestas',
+  'scene_frame0004': {
+    id: 'scene_frame0004',
+    name: 'Escenario Común 2',
+    description: 'Otro espacio común',
+    tier: 2,
+    currency: 'balance',
+    price: ITEM_TIERS[2].price,
+    image: `${BASE_PATH}assets/scenes/frame0004.png`,
+    category: 'scene'
+  },
+  'scene_frame1': {
+    id: 'scene_frame1',
+    name: 'Escenario Raro',
+    description: 'Escenario de colección rara',
+    tier: 3,
+    currency: 'balance',
+    price: ITEM_TIERS[3].price,
+    image: `${BASE_PATH}assets/scenes/frame1.png`,
+    category: 'scene'
+  },
+  'scene_frame2': {
+    id: 'scene_frame2',
+    name: 'Escenario Épico 1',
+    description: 'Escenario épico impresionante',
     tier: 4,
     currency: 'balance',
     price: ITEM_TIERS[4].price,
-    image: `${BASE_PATH}assets/decor/disco_ball.svg`,
+    image: `${BASE_PATH}assets/scenes/frame2.png`,
+    category: 'scene'
+  },
+  'scene_frame3': {
+    id: 'scene_frame3',
+    name: 'Escenario Épico 2',
+    description: 'El escenario más épico',
+    tier: 4,
+    currency: 'balance',
+    price: ITEM_TIERS[4].price,
+    image: `${BASE_PATH}assets/scenes/frame3.png`,
+    category: 'scene'
+  },
+
+  // =================== DECORATIONS (Balance Points) ===================
+  'decor_crate1': {
+    id: 'decor_crate1',
+    name: 'Caja de Madera 1',
+    description: 'Caja básica de almacenaje',
+    tier: 1,
+    currency: 'balance',
+    price: ITEM_TIERS[1].price,
+    image: `${BASE_PATH}assets/decor/Crate1.png`,
+    category: 'decoration'
+  },
+  'decor_vase1': {
+    id: 'decor_vase1',
+    name: 'Jarrón Básico 1',
+    description: 'Jarrón simple decorativo',
+    tier: 1,
+    currency: 'balance',
+    price: ITEM_TIERS[1].price,
+    image: `${BASE_PATH}assets/decor/Vase1.png`,
+    category: 'decoration'
+  },
+  'decor_vase2': {
+    id: 'decor_vase2',
+    name: 'Jarrón Básico 2',
+    description: 'Otro jarrón simple',
+    tier: 1,
+    currency: 'balance',
+    price: ITEM_TIERS[1].price,
+    image: `${BASE_PATH}assets/decor/Vase2.png`,
+    category: 'decoration'
+  },
+  'decor_crate2': {
+    id: 'decor_crate2',
+    name: 'Caja de Madera 2',
+    description: 'Caja de nivel común',
+    tier: 2,
+    currency: 'balance',
+    price: ITEM_TIERS[2].price,
+    image: `${BASE_PATH}assets/decor/Crate2.png`,
+    category: 'decoration'
+  },
+  'decor_crate3': {
+    id: 'decor_crate3',
+    name: 'Caja Reforzada',
+    description: 'Caja común reforzada',
+    tier: 2,
+    currency: 'balance',
+    price: ITEM_TIERS[2].price,
+    image: `${BASE_PATH}assets/decor/Crate3.png`,
+    category: 'decoration'
+  },
+  'decor_vase3': {
+    id: 'decor_vase3',
+    name: 'Jarrón Común 1',
+    description: 'Jarrón de mejor calidad',
+    tier: 2,
+    currency: 'balance',
+    price: ITEM_TIERS[2].price,
+    image: `${BASE_PATH}assets/decor/Vase3.png`,
+    category: 'decoration'
+  },
+  'decor_vase4': {
+    id: 'decor_vase4',
+    name: 'Jarrón Común 2',
+    description: 'Jarrón común decorativo',
+    tier: 2,
+    currency: 'balance',
+    price: ITEM_TIERS[2].price,
+    image: `${BASE_PATH}assets/decor/Vase4.png`,
+    category: 'decoration'
+  },
+  'decor_vase5': {
+    id: 'decor_vase5',
+    name: 'Jarrón Raro',
+    description: 'Jarrón de colección rara',
+    tier: 3,
+    currency: 'balance',
+    price: ITEM_TIERS[3].price,
+    image: `${BASE_PATH}assets/decor/Vase5.png`,
+    category: 'decoration'
+  },
+  'decor_vase6': {
+    id: 'decor_vase6',
+    name: 'Jarrón Épico',
+    description: 'El jarrón más épico',
+    tier: 4,
+    currency: 'balance',
+    price: ITEM_TIERS[4].price,
+    image: `${BASE_PATH}assets/decor/Vase6.png`,
     category: 'decoration'
   }
 };

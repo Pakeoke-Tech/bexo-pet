@@ -8,10 +8,10 @@ interface MascotProps {
 }
 
 export function Mascot({ skinId, animation = 'idle' }: MascotProps) {
-  const skinImage = skinId.replace('skin_', `${BASE_PATH}assets/skins/`) + '.svg';
+  const skinImage = skinId.replace('skin_', `${BASE_PATH}assets/skins/`) + '.png';
 
   return (
-    <div className="relative w-64 h-64 mx-auto">
+    <div className="relative w-48 h-48 mx-auto drop-shadow-2xl">
       <img
         src={skinImage}
         alt="Mascot"
