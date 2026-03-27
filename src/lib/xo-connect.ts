@@ -29,7 +29,7 @@ export function initializeXOConnect(): XOProvider {
         return '0x1';
       }
       if (method === 'eth_getBalance') {
-        return '0x0'; // 0 balance
+        return '0xDE0B6B3A76400000'; // 1000 ETH para demo
       }
       return '0x0';
     }

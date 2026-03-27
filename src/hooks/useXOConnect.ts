@@ -5,7 +5,7 @@ import { getXOConnectProvider, initializeXOConnect } from '../lib/xo-connect';
 
 export function useXOConnect() {
   const [error, setError] = useState<Error | null>(null);
-  const { setWallet, setWalletBalance, disconnectWallet } = useGameStore();
+  const { setWallet, setWalletBalance, updatePoints, disconnectWallet } = useGameStore();
 
   const connect = useCallback(async () => {
     try {
@@ -38,6 +38,15 @@ export function useXOConnect() {
 
       setWalletBalance(balance);
 
+      // DEMO: Set initial points for hackathon demo
+      // Balance Points: calculated from wallet balance (balance * 5)
+      // Rare Points: 10,000 for demo (allows buying tier 3-4 skins)
+      const balanceInWei = BigInt(balance);
+      const balancePoints = Number(balanceInWei) * 5;
+      const demoRarePoints = 10000; // 10K Rare Points para demo
+
+      updatePoints(balancePoints, demoRarePoints);
+
     } catch (err: any) {
       console.error('Error connecting wallet:', err);
 
@@ -50,7 +59,7 @@ export function useXOConnect() {
         setError(err);
       }
     }
-  }, [setWallet, setWalletBalance]);
+  }, [setWallet, setWalletBalance, updatePoints]);
 
   const disconnect = useCallback(() => {
     disconnectWallet();
@@ -83,6 +92,11 @@ export function useXOConnect() {
             params: [accounts[0], 'latest']
           });
           setWalletBalance(balance);
+
+          // Recalculate points for new account
+          const balanceInWei = BigInt(balance);
+          const balancePoints = Number(balanceInWei) * 5;
+          updatePoints(balancePoints, 10000); // Keep demo rare points
         } catch (error) {
           console.error('Error getting balance for switched account:', error);
         }
@@ -110,7 +124,7 @@ export function useXOConnect() {
       provider.removeListener?.('chainChanged', handleChainChanged);
       provider.removeListener?.('disconnect', handleDisconnect);
     };
-  }, [setWallet, setWalletBalance, disconnect]);
+  }, [setWallet, setWalletBalance, updatePoints, disconnect]);
 
   return {
     isConnected: useGameStore(state => state.isConnected),
