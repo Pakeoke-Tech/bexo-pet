@@ -8,20 +8,23 @@ export function useInventory() {
   const address = useGameStore(state => state.address);
   const inventory = useGameStore(state => state.inventory);
   const setInventory = useGameStore(state => state.setInventory);
-  const purchaseItem = useGameStore(state => state.purchaseItem);
+  const purchaseItemStore = useGameStore(state => state.purchaseItem);
 
-  // Load inventory from IndexedDB when address changes
-  useEffect(() => {
+  // Load inventory from IndexedDB when address changes or after purchase
+  const reloadInventory = useCallback(async () => {
     if (!address) return;
 
-    getInventory(address).then(items => {
-      const skins = items.filter(id => id.startsWith('skin_'));
-      const scenes = items.filter(id => id.startsWith('scene_'));
-      const decorations = items.filter(id => id.startsWith('decor_'));
+    const items = await getInventory(address);
+    const skins = items.filter(id => id.startsWith('skin_'));
+    const scenes = items.filter(id => id.startsWith('scene_'));
+    const decorations = items.filter(id => id.startsWith('decor_'));
 
-      setInventory({ skins, scenes, decorations });
-    });
+    setInventory({ skins, scenes, decorations });
   }, [address, setInventory]);
+
+  useEffect(() => {
+    reloadInventory();
+  }, [address, reloadInventory]);
 
   const equipItem = useCallback((itemId: string) => {
     if (itemId.startsWith('skin_')) {
@@ -37,6 +40,19 @@ export function useInventory() {
     useGameStore.getState().removeDecoration(decorationId);
   }, []);
 
+  const purchaseItem = useCallback(async (itemId: string, currency: Currency) => {
+    if (!address) return false;
+
+    const success = await purchaseItemStore(itemId, currency, address);
+
+    // Recargar inventario después de comprar
+    if (success) {
+      await reloadInventory();
+    }
+
+    return success;
+  }, [address, purchaseItemStore, reloadInventory]);
+
   return {
     ownedSkins: inventory.skins,
     ownedScenes: inventory.scenes,
@@ -44,9 +60,9 @@ export function useInventory() {
     equippedSkin: useGameStore(state => state.equippedSkin),
     equippedScene: useGameStore(state => state.equippedScene),
     equippedDecorations: useGameStore(state => state.equippedDecorations),
-    purchaseItem: (itemId: string, currency: Currency) =>
-      address ? purchaseItem(itemId, currency, address) : Promise.resolve(false),
+    purchaseItem,
     equipItem,
-    unequipDecoration
+    unequipDecoration,
+    reloadInventory
   };
 }
