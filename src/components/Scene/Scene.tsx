@@ -7,7 +7,7 @@ interface SceneProps {
 }
 
 export function Scene({ sceneId, decorations, children }: SceneProps) {
-  const sceneImage = sceneId.replace('scene_', '/assets/scenes/') + '.png';
+  const sceneImage = sceneId.replace('scene_', '/bexo-pet/assets/scenes/') + '.svg';
 
   return (
     <div className="relative w-full h-96 bg-gray-800 rounded-lg overflow-hidden shadow-2xl">
@@ -18,13 +18,13 @@ export function Scene({ sceneId, decorations, children }: SceneProps) {
         className="absolute inset-0 w-full h-full object-cover"
         style={{ imageRendering: 'pixelated' }}
         onError={(e) => {
-          (e.target as HTMLImageElement).src = '/assets/scenes/default.svg';
+          (e.target as HTMLImageElement).src = '/bexo-pet/assets/scenes/default.svg';
         }}
       />
 
       {/* Decorations Layer */}
       {decorations.map((decorId, index) => {
-        const decorImage = decorId.replace('decor_', '/assets/decor/') + '.png';
+        const decorImage = decorId.replace('decor_', '/bexo-pet/assets/decor/') + '.svg';
         return (
           <img
             key={decorId}

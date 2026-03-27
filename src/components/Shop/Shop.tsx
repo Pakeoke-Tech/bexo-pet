@@ -114,7 +114,7 @@ export function Shop() {
                 className="w-full h-32 object-cover rounded mb-2"
                 style={{ imageRendering: 'pixelated' }}
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = '/assets/placeholder.svg';
+                  (e.target as HTMLImageElement).src = '/bexo-pet/assets/placeholder.svg';
                 }}
               />
               <h3 className="font-bold">{item.name}</h3>
